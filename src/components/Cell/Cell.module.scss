@@ -1,0 +1,11 @@
+@import "src/scss/variables";
+
+.cell {
+  width: $cellWidth;
+  height: $cellHeight;
+  background: aquamarine;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

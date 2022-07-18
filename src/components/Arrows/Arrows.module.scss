@@ -1,0 +1,10 @@
+.arrows {
+  display: grid;
+  grid-template-columns: repeat(5, 60px);
+  grid-gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 10px;
+
+  border: 1px darkgray dashed;
+}

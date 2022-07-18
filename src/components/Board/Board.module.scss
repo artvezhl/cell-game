@@ -1,0 +1,7 @@
+@import "src/scss/variables";
+
+.board {
+  display: grid;
+  grid-template-columns: repeat($cellCount, $cellWidth);
+  grid-gap: $cellGap;
+}
