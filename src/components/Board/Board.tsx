@@ -1,20 +1,30 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 import styles from './Board.module.scss'
 import Cell from '../Cell/Cell'
+import { ICell } from '../../store/models/ICell'
 
-const Board = () => {
+interface IBoardProps {
+  board: ICell[][]
+}
+
+const Board: FC<IBoardProps> = ({ board }) => {
+  console.log('board is', board)
+
   return (
     <div className={styles.board}>
-      <Cell />
-      <Cell type="start" />
-      <Cell type="finish" />
-      <Cell />
-      <Cell type="choose" />
-      <Cell />
-      <Cell />
-      <Cell />
-      <Cell />
+      {board.map((row) => {
+        return row.map((cell) => <Cell key={cell.id} cell={cell} />)
+      })}
+      {/*<Cell />*/}
+      {/*<Cell type="start" />*/}
+      {/*<Cell type="finish" />*/}
+      {/*<Cell />*/}
+      {/*<Cell type="choose" />*/}
+      {/*<Cell />*/}
+      {/*<Cell />*/}
+      {/*<Cell />*/}
+      {/*<Cell />*/}
     </div>
   )
 }
