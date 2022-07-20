@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useRef } from 'react'
+import React, { FC, useCallback, useRef, useState } from 'react'
 
 import styles from './Board.module.scss'
 import Cell from '../Cell/Cell'
@@ -14,32 +14,34 @@ interface IBoardProps {
 
 const Board: FC<IBoardProps> = ({ board }) => {
   const dispatch = useAppDispatch()
-  const { start, stop, setCurrentPosition, setDirection } = boardSlice.actions
+  const {
+    start,
+    stop,
+    setCurrentPosition,
+    setDirection,
+    setGameFinished,
+    resetState,
+  } = boardSlice.actions
   const boardState = useAppSelector((state) => state.boardReducer)
   const { currentPosition } = useAppSelector((state) => state.boardReducer)
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false)
   const positionRef = useRef<IPosition>(currentPosition)
   positionRef.current = currentPosition
-  const cellPointer = useCallback(
-    (
-      position: IPosition,
-      { x, y }: ICell,
-      cb: React.Dispatch<React.SetStateAction<boolean>>
-    ): void => (x === position.x && y === position.y ? cb(true) : cb(false)),
-    []
-  )
-
-  useEffect(() => {
-    console.log('current', currentPosition)
-  }, [currentPosition])
 
   const startGameHandler = () => {
+    setIsButtonDisabled(true)
+    dispatch(resetState())
     dispatch(start())
 
     const refreshPosition = (index: number, delay: number): any => {
+      console.log('CLIck')
+      console.log(index)
       if (index === 0) {
+        console.log('FINAL', positionRef.current)
+        setIsButtonDisabled(false)
+        dispatch(setGameFinished(true))
         return
       }
-
       setTimeout(() => {
         const axis = Math.random() > 0.5 ? 'x' : 'y'
         const type = axis === 'x' ? 'columns' : 'rows'
@@ -48,11 +50,13 @@ const Board: FC<IBoardProps> = ({ board }) => {
         const value =
           currentValue === 0
             ? 1
-            : currentValue === boardState[type]
+            : currentValue === boardState[type] - 1
             ? -1
             : randomValue
 
         const direction = setArrowDirection(axis, value)
+
+        console.log('positionRef.current', positionRef.current)
 
         dispatch(setDirection(direction))
 
@@ -66,21 +70,23 @@ const Board: FC<IBoardProps> = ({ board }) => {
       }, delay)
     }
 
-    refreshPosition(10, 2000)
+    refreshPosition(10, 1000)
   }
 
   return (
     <>
       <div className={styles.board}>
         {board.map((row) => {
-          return row.map((cell) => (
-            <Cell key={cell.id} cell={cell} pointer={cellPointer} />
-          ))
+          return row.map((cell) => <Cell key={cell.id} cell={cell} />)
         })}
       </div>
       <div className={styles.buttons}>
-        <button onClick={startGameHandler}>START</button>
-        <button onClick={() => dispatch(stop())}>STOP</button>
+        <button disabled={isButtonDisabled} onClick={startGameHandler}>
+          START
+        </button>
+        <button disabled={!isButtonDisabled} onClick={() => dispatch(stop())}>
+          STOP
+        </button>
       </div>
     </>
   )

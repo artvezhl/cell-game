@@ -7,7 +7,8 @@ interface BoardState {
   board: ICell[][]
   rows: number
   columns: number
-  isLoading: boolean
+  isGameFinished: boolean
+  isGameActive: boolean
   directions: TDirection[]
   startPosition: IPosition
   currentPosition: IPosition
@@ -16,7 +17,8 @@ interface BoardState {
 }
 const initialState: BoardState = {
   board: [],
-  isLoading: false,
+  isGameFinished: false,
+  isGameActive: false,
   rows: 3,
   columns: 3,
   directions: [],
@@ -57,6 +59,19 @@ export const boardSlice = createSlice({
       state.board = result
     },
     start(state) {
+      console.log(
+        'state.startPosition',
+        state.startPosition.x,
+        state.startPosition.y
+      )
+      console.log('state.finishPosition', state.finishPosition)
+      console.log('state.checkedPosition', state.checkedPosition)
+      // state.startPosition = initialState.startPosition
+      // state.finishPosition = initialState.finishPosition
+      // state.checkedPosition = initialState.checkedPosition
+      state.directions = initialState.directions
+      state.isGameFinished = false
+      state.isGameActive = true
       const x = Math.floor(Math.random() * state.columns)
       state.startPosition.x = x
       state.startPosition.y = Math.floor(Math.random() * state.board[x].length)
@@ -65,7 +80,11 @@ export const boardSlice = createSlice({
       }
     },
     stop(state) {
-      state.startPosition = initialState.startPosition
+      // state.startPosition = initialState.startPosition
+      // state.finishPosition = initialState.finishPosition
+      // state.checkedPosition = initialState.checkedPosition
+      state.directions = initialState.directions
+      state.isGameActive = false
     },
     setCurrentPosition(
       state,
@@ -77,6 +96,26 @@ export const boardSlice = createSlice({
     },
     setDirection(state, action: PayloadAction<TDirection>) {
       state.directions.push(action.payload)
+    },
+    setChecked(state, action: PayloadAction<ICell>) {
+      const { x, y } = action.payload
+      state.checkedPosition = {
+        x: x,
+        y: y,
+      }
+    },
+    setGameFinished(state, action: PayloadAction<boolean>) {
+      state.isGameFinished = action.payload
+    },
+    setFinishPosition(state) {
+      state.finishPosition = state.currentPosition
+      state.isGameFinished = false
+    },
+    resetState(state) {
+      return {
+        ...initialState,
+        board: state.board,
+      }
     },
   },
 })

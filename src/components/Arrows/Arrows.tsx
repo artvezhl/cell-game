@@ -5,14 +5,17 @@ import styles from './Arrows.module.scss'
 
 interface IArrowsProps {
   directions: TDirection[]
+  isGameActive: boolean
 }
 
-const Arrows: FC<IArrowsProps> = ({ directions }) => {
+const Arrows: FC<IArrowsProps> = ({ directions, isGameActive }) => {
   return (
     <div className={styles.arrows}>
-      {directions.map((direction) => (
-        <Arrow key={Math.random() * Date.now()} direction={direction} />
-      ))}
+      {directions.length && isGameActive
+        ? directions.map((direction) => (
+            <Arrow key={Math.random() * Date.now()} direction={direction} />
+          ))
+        : null}
     </div>
   )
 }

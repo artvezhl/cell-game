@@ -8,7 +8,9 @@ import { boardSlice } from '../../store/reducers/BoardSlice'
 function App() {
   const dispatch = useAppDispatch()
   const { initBoard } = boardSlice.actions
-  const { board, directions } = useAppSelector((state) => state.boardReducer)
+  const { board, directions, isGameActive } = useAppSelector(
+    (state) => state.boardReducer
+  )
 
   useEffect(() => {
     dispatch(initBoard())
@@ -18,7 +20,7 @@ function App() {
     <div className={styles.app}>
       <h1>Cell Game</h1>
       <Board board={board} />
-      {directions.length ? <Arrows directions={directions} /> : null}
+      {<Arrows directions={directions} isGameActive={isGameActive} />}
     </div>
   )
 }
