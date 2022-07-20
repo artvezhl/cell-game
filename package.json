@@ -1,6 +1,7 @@
 {
   "name": "cell-game",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "homepage": "https://cell-game-psi.vercel.app/",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
@@ -8,6 +9,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
     "react-scripts": "5.0.1",
+    "sass": "^1.53.0",
     "typescript": "^4.7.4"
   },
   "scripts": {
