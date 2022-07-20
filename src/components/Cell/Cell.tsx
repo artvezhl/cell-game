@@ -62,8 +62,6 @@ const Cell: FC<ICellProps> = ({ cell }) => {
     isGameFinished,
   ])
 
-  console.log('isFinish', isFinish)
-
   const content = isStart ? (
     <img src={start} alt="start" />
   ) : isFinish ? (
@@ -71,7 +69,6 @@ const Cell: FC<ICellProps> = ({ cell }) => {
   ) : null
 
   const chooseCellHandler = () => {
-    console.log('coordinates', cell)
     if (isGameFinished) {
       dispatch(setChecked(cell))
       setTimeout(() => {

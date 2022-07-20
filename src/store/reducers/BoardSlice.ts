@@ -59,16 +59,6 @@ export const boardSlice = createSlice({
       state.board = result
     },
     start(state) {
-      console.log(
-        'state.startPosition',
-        state.startPosition.x,
-        state.startPosition.y
-      )
-      console.log('state.finishPosition', state.finishPosition)
-      console.log('state.checkedPosition', state.checkedPosition)
-      // state.startPosition = initialState.startPosition
-      // state.finishPosition = initialState.finishPosition
-      // state.checkedPosition = initialState.checkedPosition
       state.directions = initialState.directions
       state.isGameFinished = false
       state.isGameActive = true
@@ -80,9 +70,6 @@ export const boardSlice = createSlice({
       }
     },
     stop(state) {
-      // state.startPosition = initialState.startPosition
-      // state.finishPosition = initialState.finishPosition
-      // state.checkedPosition = initialState.checkedPosition
       state.directions = initialState.directions
       state.isGameActive = false
     },

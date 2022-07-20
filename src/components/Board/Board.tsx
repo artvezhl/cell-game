@@ -34,10 +34,7 @@ const Board: FC<IBoardProps> = ({ board }) => {
     dispatch(start())
 
     const refreshPosition = (index: number, delay: number): any => {
-      console.log('CLIck')
-      console.log(index)
       if (index === 0) {
-        console.log('FINAL', positionRef.current)
         setIsButtonDisabled(false)
         dispatch(setGameFinished(true))
         return
@@ -55,8 +52,6 @@ const Board: FC<IBoardProps> = ({ board }) => {
             : randomValue
 
         const direction = setArrowDirection(axis, value)
-
-        console.log('positionRef.current', positionRef.current)
 
         dispatch(setDirection(direction))
 
