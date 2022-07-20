@@ -1,21 +1,18 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-import Arrow from '../Arrow/Arrow'
+import Arrow, { TDirection } from '../Arrow/Arrow'
 import styles from './Arrows.module.scss'
 
-const Arrows = () => {
+interface IArrowsProps {
+  directions: TDirection[]
+}
+
+const Arrows: FC<IArrowsProps> = ({ directions }) => {
   return (
     <div className={styles.arrows}>
-      <Arrow direction="down" />
-      <Arrow direction="right" />
-      <Arrow direction="down" />
-      <Arrow direction="down" />
-      <Arrow direction="up" />
-      <Arrow direction="down" />
-      <Arrow direction="left" />
-      <Arrow direction="down" />
-      <Arrow direction="down" />
-      <Arrow direction="down" />
+      {directions.map((direction) => (
+        <Arrow key={Math.random() * Date.now()} direction={direction} />
+      ))}
     </div>
   )
 }

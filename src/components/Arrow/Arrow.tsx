@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import styles from './Arrow.module.scss'
 import arrow from '../../images/down-arrow.png'
 
-type TDirection = 'right' | 'left' | 'up' | 'down'
+export type TDirection = 'right' | 'left' | 'up' | 'down'
 
 interface IArrowProps {
   direction: TDirection

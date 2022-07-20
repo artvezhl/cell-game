@@ -1,16 +1,9 @@
+import { IPosition } from './IPosition'
+
 export interface IBoard {
   rows: number
   columns: number
-  startPosition: {
-    x: number
-    y: number
-  }
-  finishPosition: {
-    x: number
-    y: number
-  }
-  checkedPosition: {
-    x: number
-    y: number
-  }
+  startPosition: IPosition
+  finishPosition: IPosition
+  checkedPosition: IPosition
 }

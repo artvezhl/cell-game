@@ -5,3 +5,36 @@
   grid-template-columns: repeat($cellCount, $cellWidth);
   grid-gap: $cellGap;
 }
+
+.buttons {
+  display: flex;
+  width: 100%;
+  max-width: 300px;
+  margin-top: 20px;
+  justify-content: space-around;
+
+  button {
+    width: 100px;
+    height: 40px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    background: radial-gradient(circle, rgba(26,252,7,1) 0%, rgba(70,252,242,1) 100%);
+    cursor: pointer;
+    transition: ease .3s;
+
+    &:hover {
+      box-shadow: 3px 3px 5px lightseagreen;
+    }
+
+    &:nth-child(2n) {
+      background: radial-gradient(circle, rgba(228,0,0,1) 0%, rgba(252,70,204,0.8225884103641457) 100%);
+
+      &:hover {
+        box-shadow: 3px 3px 5px mediumvioletred;
+      }
+    }
+
+
+  }
+}
