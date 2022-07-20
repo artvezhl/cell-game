@@ -1,6 +1,6 @@
 # Cell Game
 
-[Cell Game App link](https://cell-game-psi.vercel.app/)
+[Cell Game App link](https://artvezhl.github.io/cell-game/)
 
 ## Stack
 - TS, HTML, SCSS
