@@ -5,7 +5,6 @@ import finish from '../../images/finish.png'
 import styles from './Cell.module.scss'
 import { ICell } from '../../store/models/ICell'
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
-import { IPosition } from '../../store/models/IPosition'
 import { boardSlice } from '../../store/reducers/BoardSlice'
 
 interface ICellProps {
@@ -73,7 +72,6 @@ const Cell: FC<ICellProps> = ({ cell }) => {
       dispatch(setChecked(cell))
       setTimeout(() => {
         dispatch(setFinishPosition())
-        // setIsFinish(true)
       }, 500)
     }
   }
