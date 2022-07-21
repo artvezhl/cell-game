@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/cell-game/static/css/main.f8a17f94.css",
-    "main.js": "/cell-game/static/js/main.58d0a9b2.js",
+    "main.css": "/cell-game/static/css/main.5696b24a.css",
+    "main.js": "/cell-game/static/js/main.0b61313c.js",
     "index.html": "/cell-game/index.html",
-    "main.f8a17f94.css.map": "/cell-game/static/css/main.f8a17f94.css.map",
-    "main.58d0a9b2.js.map": "/cell-game/static/js/main.58d0a9b2.js.map"
+    "main.5696b24a.css.map": "/cell-game/static/css/main.5696b24a.css.map",
+    "main.0b61313c.js.map": "/cell-game/static/js/main.0b61313c.js.map"
   },
   "entrypoints": [
-    "static/css/main.f8a17f94.css",
-    "static/js/main.58d0a9b2.js"
+    "static/css/main.5696b24a.css",
+    "static/js/main.0b61313c.js"
   ]
 }
