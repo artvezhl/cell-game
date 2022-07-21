@@ -69,10 +69,6 @@ export const boardSlice = createSlice({
         ...state.startPosition,
       }
     },
-    stop(state) {
-      state.directions = initialState.directions
-      state.isGameActive = false
-    },
     setCurrentPosition(
       state,
       action: PayloadAction<{ axis: string; value: number }>

@@ -16,30 +16,38 @@ const Board: FC<IBoardProps> = ({ board }) => {
   const dispatch = useAppDispatch()
   const {
     start,
-    stop,
     setCurrentPosition,
     setDirection,
     setGameFinished,
     resetState,
   } = boardSlice.actions
   const boardState = useAppSelector((state) => state.boardReducer)
-  const { currentPosition } = useAppSelector((state) => state.boardReducer)
+  const { currentPosition, isGameActive } = useAppSelector(
+    (state) => state.boardReducer
+  )
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false)
   const positionRef = useRef<IPosition>(currentPosition)
+  const isGameActiveRef = useRef<boolean>(isGameActive)
   positionRef.current = currentPosition
+  isGameActiveRef.current = isGameActive
 
   const startGameHandler = () => {
     setIsButtonDisabled(true)
     dispatch(resetState())
     dispatch(start())
+    let timeout: ReturnType<typeof setTimeout>
 
-    const refreshPosition = (index: number, delay: number): any => {
+    const refreshPosition = (index: number, delay: number): undefined => {
       if (index === 0) {
         setIsButtonDisabled(false)
         dispatch(setGameFinished(true))
         return
       }
-      setTimeout(() => {
+      if (!isGameActiveRef.current && index < 10) {
+        clearTimeout(timeout)
+        return
+      }
+      timeout = setTimeout(() => {
         const axis = Math.random() > 0.5 ? 'x' : 'y'
         const type = axis === 'x' ? 'columns' : 'rows'
         const currentValue = positionRef.current[axis]
@@ -79,7 +87,13 @@ const Board: FC<IBoardProps> = ({ board }) => {
         <button disabled={isButtonDisabled} onClick={startGameHandler}>
           START
         </button>
-        <button disabled={!isButtonDisabled} onClick={() => dispatch(stop())}>
+        <button
+          disabled={!isButtonDisabled}
+          onClick={() => {
+            setIsButtonDisabled(false)
+            dispatch(resetState())
+          }}
+        >
           STOP
         </button>
       </div>
